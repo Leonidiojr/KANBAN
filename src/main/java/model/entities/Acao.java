@@ -1,5 +1,12 @@
 package model.entities;
 
+/**
+ *
+ * @author Leonidio Alves de Moraes Junior<leonidiojr@gmail.com>
+ * @date 16/11/2023
+ * @brief Class TipoUsuario
+ */
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import model.entities.enums.Status;
@@ -96,22 +103,22 @@ public class Acao {
             case SECONDS:
                 LocalDateTime dateTime = LocalDateTime.of(2023, 11, 16, 12, 0, 0);
                 LocalDateTime novaData = dateTime.plusSeconds(prorrogacao);
-                this.dataFim = novaData;
+                this.dataFim = dataFim;
                 break;
             case MINUTES:
-                this.dataFim = dataFim + prorrogacao;
+             
                 break;    
             case HOURS:
-                this.dataFim = dataFim + prorrogacao;
+                
                 break;
             case DAYS:
-                this.dataFim = dataFim + prorrogacao;
+                
                 break;
             case MONTHS:
-                this.dataFim = dataFim + prorrogacao;
+                
                 break;
             case YEARS:
-                this.dataFim = dataFim + prorrogacao;
+                
                 break;
             default:
                 throw new AssertionError();

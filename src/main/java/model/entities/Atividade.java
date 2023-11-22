@@ -1,8 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package model.entities;
 
 import java.util.Date;
@@ -27,9 +22,10 @@ public class Atividade {
     public Atividade(){
     }
     
-    public Atividade(String nome, Date dataInicio, Double percentualAtividade) {
+    public Atividade(String nome, Date dataInicio, Date dataFim, Double percentualAtividade) {
         this.nome = nome;
         this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
         this.percentualAtividade = percentualAtividade;
     }
 
@@ -59,10 +55,6 @@ public class Atividade {
 
     public Double getPercentualAtividade() {
         return percentualAtividade;
-    }
-
-    public void setPercentualAtividade(Double percentualAtividade) {
-        this.percentualAtividade = percentualAtividade;
     }
     
     public void calcPercent(){
