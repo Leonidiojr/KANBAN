@@ -1,16 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package model.entities;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+import model.entities.enums.StatusSituacao;
 
 /**
  *
- * @author Carlos Garcia <carlosgarcianeto229@gmail.com>
+ * @author Pedro Queiroz Lima Barreto <pqlb1512@gmail.com>
  * @date 16/11/2023
  * @brief Class Projeto
  */
@@ -19,21 +18,22 @@ public class Projeto {
     private Date dataInicio;
     private Date dataFim;
     private String descricao;
-    private Double percentualProjeto;
-    private Double duracao;
+    private StatusSituacao situacao;
+    
+    private Empresa empresa;
+    private List<Atividade> atividades = new ArrayList<>();
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
             
     public Projeto(){
     }
     
-    public Projeto(String nome, Date dataInicio, Date dataFim, String descricao, Double percentualProjeto, Double duracao) {
+    public Projeto(String nome, Date dataInicio, Date dataFim, String descricao, StatusSituacao situacao) {
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.descricao = descricao;
-        this.percentualProjeto = percentualProjeto;
-        this.duracao = duracao;
+        this.situacao = situacao;
     }
 
     public String getNome() {
@@ -68,40 +68,42 @@ public class Projeto {
         this.descricao = descricao;
     }
 
-    public Double getPercentualProjeto() {
-        return percentualProjeto;
+    public StatusSituacao getSituacao() {
+        return situacao;
     }
 
-    public void setPercentualProjeto(Double percentualProjeto) {
-        this.percentualProjeto = percentualProjeto;
+    public void setSituacao(StatusSituacao situacao) {
+        this.situacao = situacao;
     }
 
-    public Double getDuracao() {
-        return duracao;
+    public Empresa getEmpresa() {
+        return empresa;
     }
 
-    public void setDuracao(Double duracao) {
-        this.duracao = duracao;
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public List<Atividade> getAtividades() {
+        return atividades;
     }
     
-    public void calcPercent(Double percentualProjeto){
-        this.percentualProjeto = percentualProjeto;
+    public void addAtividade(Atividade atividade){
+        atividades.add(atividade);
     }
     
-    public void validarData(Date dataInicio, Date dataFim){
-        this.dataInicio = dataInicio;
-        this.dataFim = dataFim;
-        //continuar essa função
+    public void removeAtividade(Atividade atividade){
+        atividades.remove(atividade);
     }
     
-    public void calcularDuracao(Double duracao){
-        this.duracao = duracao;
-        //aqui deve ser um return da data fim menos a data inicio
-        //para isso é necessario alterar a função
+    public long calcularDuracao(){
+        long duracao = dataFim.getTime()- dataInicio.getTime();
+        return TimeUnit.DAYS.convert(duracao, TimeUnit.DAYS);
     }
     
+    public double calcPercent(){
+        //essa função precisa da porcentagem da ação para funcionar,
+        //ela precisa calcular a porcentagem da atividade baseada na porcentagem de cada atividade
+        return 0;
+    }
 }
-
-
-
-
