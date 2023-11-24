@@ -6,10 +6,8 @@
 package model.entities;
 
 import java.util.Date;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 /**
  *
  * @author Volid
@@ -19,26 +17,41 @@ import java.util.Calendar;
 public class Atividade {
     
     private String nome;
+    private String responsavel;
+    private Date dataCriacao;
     private Date dataInicio;
     private Date dataFim;
     private Double percentualAtividade;
+
+    private List<Acao> acoes = new ArrayList<>();
     
-    
+ 
     public Atividade(){
     }
-    
-    public Atividade(String nome, Date dataInicio, Double percentualAtividade) {
+
+    public Atividade(String nome, String responsavel, Date dataInicio, Date dataFim, Date dataCriacao, Double percentualAtividade) {
         this.nome = nome;
+        this.responsavel = responsavel;
         this.dataInicio = dataInicio;
+        this.dataFim = dataFim;
+        this.dataCriacao = dataCriacao;
         this.percentualAtividade = percentualAtividade;
     }
-
+    
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    public String getResponsavel(){
+        return responsavel;
+    }
+    
+    public void setResponsavel(String responsavel){
+        this.responsavel = responsavel; 
     }
 
     public Date getDataInicio() {
@@ -56,61 +69,93 @@ public class Atividade {
     public void setDataFim(Date dataFim) {
         this.dataFim = dataFim;
     }
+    
+    public Date getDataCriacao(){
+        return dataCriacao;
+    }
 
     public Double getPercentualAtividade() {
         return percentualAtividade;
     }
-
-    public void setPercentualAtividade(Double percentualAtividade) {
-        this.percentualAtividade = percentualAtividade;
+    
+    public List<Acao> getAcoes(){
+        return acoes;
     }
     
-    public void calcPercent(){
-        
+    public void addAcao (Acao acao){
+        acoes.add(acao);
     }
     
-    public void validarData(){
-        
-        if (dataInicio != null) {
-            validarDataFormato(dataInicio, "Data de Início");
-        }
-
-        if (dataFim != null) {
-            validarDataFormato(dataFim, "Data de Fim");
-        }
+    public void removeAcao (Acao acao){
+        acoes.remove(acao);
     }
-
-    private void validarDataFormato(Date data, String tipoData) {
+    
+    
+    public Double calculaPercentual(){
+        if (acoes.isEmpty()){
+            return 0.0;
+        }
+        
+        int acoesConcluidas = 0;
+        int totalAcoes = acoes.size();
+        
+        for (Acao acao : acoes){
+            if (acao.getStatus().equals("CONCLUIDO")){
+                acoesConcluidas++;
+            }
+        }
+        
+        Double percentual = (double) acoesConcluidas / totalAcoes * 100;
+        return percentual;
+    }
+    
+    
+    //Método que valida a Data
+    private void validarDataFormato(String data) throws ParseException{
         // Define o formato esperado da data
-        DateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
-        formatoData.setLenient(false); // Impede datas inválidas, como 2023-02-30
+        SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+        sdf1.setLenient(false); // Impede datas inválidas, como 2023-02-30
 
         try {
-            // Tenta fazer o parsing da data
-            String dataString = formatoData.format(data); // Converte Date para String
-            formatoData.parse(dataString); // Tenta fazer o parsing da String
-            System.out.println(tipoData + " válida: " + dataString);
+            // Tenta fazer o parsing da String data 
+            Date newDate = sdf1.parse(data); // Converte string para date
         } catch (ParseException e) {
             // Captura exceção se a data não estiver no formato correto
-            System.out.println(tipoData + " inválida. Formato esperado: yyyy-MM-dd");
+            throw new ParseException(" Data inválida. Formato esperado: dd/MM/yyyy",0);
         }
     }
     
-    public void prorrogarData(int dias){
-        if (dataFim != null) {
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(dataFim);
-
-            // Adiciona o número de dias à dataFim
-            calendar.add(Calendar.DAY_OF_MONTH, dias);
-
-            // Atualiza a nova dataFim
-            dataFim = calendar.getTime();
-
-            System.out.println("Data de Fim prorrogada para: " + dataFim);
-        } else {
-            System.out.println("Não é possível prorrogar. Data de Fim não definida.");
+    
+    // Método que altera a Data
+    public String alterarData(String dataInicio, String dataFim) throws ParseException{
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        
+        validarDataFormato(dataInicio);
+        validarDataFormato(dataFim);
+        
+        Date dataInicio2 = sdf.parse(dataInicio);
+        Date dataFim2 = sdf.parse(dataFim);
+        
+        //Atualiza data da atividade
+        Date now = new Date();
+        if (dataInicio2.before(now) || dataFim2.before(now)){
+            return "As datas precisam ser datas futuras";
         }
+        if(!dataFim2.after(dataInicio2)){
+            return "Data fim deve ser após a data de inicio";
+        }
+        
+        this.dataInicio = dataInicio2;
+        this.dataFim = dataFim2;
+        return null;
     }
+    
+   
+    //Método que salva a data da criação da atividade
+    public void salvaDataCriacao (){
+        dataCriacao = new Date(); 
+    }
+    
         
 }
