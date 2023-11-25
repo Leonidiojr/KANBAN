@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-/*package model.entities;
+package model.entities;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,16 +13,22 @@ import java.util.Scanner;
 import model.entities.enums.Status;
 import model.entities.enums.StatusSituacao;
 import model.entities.enums.TipoProrrogacao;
+import model.entities.enums.TipoUsuario;
 
 /**
  * @author Pedro Queiroz Lima Barreto <pqlb1512@gmail.com>
  * @date 23/11/2023
  * @brief Class ClasseTeste
  */
-/*public class ClasseTeste {
+public class ClasseTeste {
     public static void main(String[] args) throws ParseException {
+        String login = "admin";
+        String senha = "admin";
+        TipoUsuario tipoUsuario = TipoUsuario.ADMINISTRADOR;
+            
+        Senha usuario = new Senha(login, senha, tipoUsuario);
         Scanner sc = new Scanner(System.in);
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
         System.out.println("Informe o nome da atividade: ");
         String nome = sc.nextLine();
@@ -80,7 +86,7 @@ import model.entities.enums.TipoProrrogacao;
                 System.out.println("Informe quantos Dias vc deseja adicionar");
                 prorrogacao = sc.nextInt();
                 acao.prorrogacao(prorrogacao, tipoProrrogacao);
-                System.out.println(dataFim);
+                System.out.println(acao.getDataFim());
             }
             if(opc == 5){
                 tipoProrrogacao = TipoProrrogacao.MONTHS;
@@ -97,7 +103,32 @@ import model.entities.enums.TipoProrrogacao;
         }
         else{
             System.out.println("Data fim: " + dataFim);
+        }*/
+        System.out.println("Deseja criar uma pasta nova? [1 - Sim|2 - Não]");
+        int opcarq = sc.nextInt();
+        if(opcarq == 1){
+            usuario.criarArquivos();
         }
+        System.out.println("Cadastro de novo Usuário");
+        System.out.println("Informe o Login:");
+        login = sc.next();
+        System.out.println("Cadastre a senha: ");
+        senha = sc.next();
+        System.out.println("Informe o tipo de Usuário:");
+        System.out.println("1 - Funcionário");
+        System.out.println("2 - Líder");
+        System.out.println("3 - Administrador");
+        int tpfunc = sc.nextInt();
+        if(tpfunc == 1){
+            tipoUsuario = TipoUsuario.FUNCIONARIO;
+        }
+        if(tpfunc == 2){
+            tipoUsuario = TipoUsuario.LIDER;
+        }
+        if(tpfunc == 3){
+            tipoUsuario = TipoUsuario.ADMINISTRADOR;
+        }
+        
+        usuario.cadastroUsuario(login, senha, tipoUsuario);
     }
 }
-*/
