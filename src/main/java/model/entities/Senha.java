@@ -1,7 +1,9 @@
 package model.entities;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import model.entities.enums.TipoUsuario;
@@ -57,32 +59,13 @@ public class Senha {
             String[] lines = new String[] {"Usuario: "+login, "Senha: "+senha};
             for (int i = 0; i < 3; i++) {
                 if(i == 0){
-                    path = "c:\\cadastro\\funcionarios.txt";
-                    try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
-                    }
-                    catch(IOException e){
-                        e.printStackTrace();
-                    }
+                    file = new File("c:\\cadastro\\funcionarios").mkdir();
                 }
                 if(i == 1){
-                    path = "c:\\cadastro\\lideres.txt";
-                    try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
-                    }
-                    catch(IOException e){
-                        e.printStackTrace();
-                    }
+                    file = new File("c:\\cadastro\\lideres").mkdir();
                 }
                 if(i == 2){
-                    path = "c:\\cadastro\\adms.txt";
-                    try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
-                        for(String line : lines){
-                            bw.write(line);
-                            bw.newLine();
-                        }
-                    }
-                    catch(IOException e){
-                        e.printStackTrace();
-                    }
+                   file = new File("c:\\cadastro\\adms").mkdir();
                 }
             }
         }
@@ -95,10 +78,10 @@ public class Senha {
         this.senha = senha;
         this.tipoUsuario = tipoUsuario;
         String path = "";
-        String[] lines = new String[] {"Login: "+login,"Senha: "+senha,"Tipo Usuário: "+tipoUsuario};
+        String[] lines = new String[] {login,senha};
         
         if(tipoUsuario == TipoUsuario.FUNCIONARIO){
-            path = "c:\\cadastro\\funcionarios.txt";
+            path = "c:\\cadastro\\funcionarios\\"+login+".txt";
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
                 for(String line : lines){
                     bw.write(line);
@@ -110,7 +93,7 @@ public class Senha {
             }
         }
         if(tipoUsuario == TipoUsuario.LIDER){
-            path = "c:\\cadastro\\lideres.txt";
+           path = "c:\\cadastro\\lideres\\"+login+".txt";
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
                 for(String line : lines){
                     bw.write(line);
@@ -122,7 +105,7 @@ public class Senha {
             }
         }
         if(tipoUsuario == TipoUsuario.ADMINISTRADOR){
-            path = "c:\\cadastro\\adms.txt";
+            path = "c:\\cadastro\\adms\\"+login+".txt";
             try(BufferedWriter bw = new BufferedWriter(new FileWriter(path))){
                 for(String line : lines){
                     bw.write(line);
@@ -132,6 +115,33 @@ public class Senha {
             catch(IOException e){
                 e.printStackTrace();
             }
+        }
+    }
+    
+    public void VerificacaoUsuario(String login, String senha){
+        String loginVerificar = login;
+        String senhaVerificar = senha;
+        String path = "";
+        for(int i = 0; i < 3; i++) {
+            if (i == 0) {
+                path = "c:\\cadastro\\adms\\"+loginVerificar+".txt";
+            }
+            if (i == 1) {
+                path = "c:\\cadastro\\lideres\\"+loginVerificar+".txt";
+            }
+            if (i == 2) {
+                path = "c:\\cadastro\\funcionarios\\"+loginVerificar+".txt";
+            }
+            try(BufferedReader br = new BufferedReader(new FileReader(path))){
+                String line = br.readLine();
+                while(line != null){
+                    System.out.println(line);
+                    line = br.readLine();
+                }
+            }
+            catch(IOException e){
+                System.out.println("Error : " + e.getMessage());
+            } 
         }
     }
 }

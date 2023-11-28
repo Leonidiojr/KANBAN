@@ -53,5 +53,4 @@ public class Funcionario {
     public void setMatricula(Integer matricula) {
         this.matricula = matricula;
     }
-
 }

@@ -108,6 +108,7 @@ public class ClasseTeste {
         int opcarq = sc.nextInt();
         if(opcarq == 1){
             usuario.criarArquivos();
+            usuario.cadastroUsuario(login, senha, tipoUsuario);
         }
         System.out.println("Cadastro de novo Usuário");
         System.out.println("Informe o Login:");
@@ -128,7 +129,12 @@ public class ClasseTeste {
         if(tpfunc == 3){
             tipoUsuario = TipoUsuario.ADMINISTRADOR;
         }
-        
         usuario.cadastroUsuario(login, senha, tipoUsuario);
+        
+        System.out.println("Informe o login: ");
+        login = sc.next();
+        System.out.println("Informe a senha: ");
+        senha = sc.next();
+        usuario.VerificacaoUsuario(login, senha);
     }
 }

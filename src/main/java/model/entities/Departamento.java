@@ -41,5 +41,4 @@ public class Departamento {
     public void setCodigoDepartamento(Integer codigoDepartamento) {
         this.codigoDepartamento = codigoDepartamento;
     }
-
 }
