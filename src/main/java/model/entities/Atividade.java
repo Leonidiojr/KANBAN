@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+
 /**
  *
  * @author Volid
@@ -14,19 +15,18 @@ import java.util.List;
  * @brief Class Atividade
  */
 public class Atividade {
-    
+
     private String nome;
     private Date dataInicio;
     private Date dataFim;
     private Double percentualAtividade;
-    
+
     private Projeto projeto;
     private List<Acao> listaAcoes = new ArrayList<>();
-    
-    
-    public Atividade(){
+
+    public Atividade() {
     }
-    
+
     public Atividade(String nome, Date dataInicio, Date dataFim, Double percentualAtividade) {
         this.nome = nome;
         this.dataInicio = dataInicio;
@@ -81,17 +81,17 @@ public class Atividade {
     public void addListaAcoes(Acao acao) {
         listaAcoes.add(acao);
     }
-    
+
     public void removeListaAcoes(Acao acao) {
         listaAcoes.remove(acao);
     }
-    
-    public void calcPercent(){
+
+    public void calcPercent() {
         //Arrumar essa função
     }
-    
-    public void validarData(){
-        
+
+    public void validarData() {
+
         if (dataInicio != null) {
             validarDataFormato(dataInicio, "Data de Início");
         }
@@ -116,8 +116,8 @@ public class Atividade {
             System.out.println(tipoData + " inválida. Formato esperado: yyyy-MM-dd");
         }
     }
-    
-    public void prorrogarData(int dias){
+
+    public void prorrogarData(int dias) {
         if (dataFim != null) {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(dataFim);
@@ -133,5 +133,5 @@ public class Atividade {
             System.out.println("Não é possível prorrogar. Data de Fim não definida.");
         }
     }
-        
+
 }

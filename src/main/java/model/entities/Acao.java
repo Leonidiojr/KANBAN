@@ -6,7 +6,6 @@ package model.entities;
  * @date 16/11/2023
  * @brief Class TipoUsuario
  */
-
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
@@ -14,9 +13,8 @@ import model.entities.enums.Status;
 import model.entities.enums.StatusSituacao;
 import model.entities.enums.TipoProrrogacao;
 
-
 public class Acao {
-    
+
     private String nome;
     private Date dataInicio;
     private Date dataFim;
@@ -25,7 +23,7 @@ public class Acao {
     private Integer prorrogacao;
     private TipoProrrogacao tipoProrrogacao;
     private StatusSituacao situacao;
-    
+
     private Funcionario funcionario;
     private Atividade atividade;
 
@@ -124,21 +122,21 @@ public class Acao {
     public void setAtividade(Atividade atividade) {
         this.atividade = atividade;
     }
-    
-    public Double atualizarPercentual(){
+
+    public Double atualizarPercentual() {
         percentual = 0.0;//entrada.get();
         return percentual;
     }
-    
-    public String validarData(Date dataInicio, Date dataFim){
-        if(!dataFim.after(dataInicio)){
+
+    public String validarData(Date dataInicio, Date dataFim) {
+        if (!dataFim.after(dataInicio)) {
             return "Data de fim não pode ser antes da de início";
+        } else {
+            return null;
         }
-        else
-            return null;   
     }
-    
-    public void prorrogacao(int prorrogacao, TipoProrrogacao tipoProrrogacao){
+
+    public void prorrogacao(int prorrogacao, TipoProrrogacao tipoProrrogacao) {
         switch (tipoProrrogacao) {
             case SECONDS:
                 LocalDateTime dataFimDateTime = dataFim.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
@@ -157,7 +155,7 @@ public class Acao {
                 break;
             case DAYS:
                 dataFimDateTime = dataFim.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-                LocalDateTime novaDataDias= dataFimDateTime.plusDays(prorrogacao);
+                LocalDateTime novaDataDias = dataFimDateTime.plusDays(prorrogacao);
                 this.dataFim = Date.from(novaDataDias.atZone(ZoneId.systemDefault()).toInstant());
                 break;
             case MONTHS:

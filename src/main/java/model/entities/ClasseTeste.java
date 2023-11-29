@@ -25,6 +25,8 @@ public class ClasseTeste {
         String login = "admin";
         String senha = "admin";
         TipoUsuario tipoUsuario = TipoUsuario.ADMINISTRADOR;
+        
+        Funcionario funcionario = new Funcionario(login, cpf, matricula, senha, departamento, acao);
             
         Senha usuario = new Senha(login, senha, tipoUsuario, funcionario);
         Scanner sc = new Scanner(System.in);

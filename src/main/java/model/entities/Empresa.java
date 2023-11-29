@@ -13,8 +13,8 @@ public class Empresa {
 
     // Atributos da classe Empresa
     private String nomeEmpresa;
-    private Double cnpj; 
-    
+    private Double cnpj;
+
     private List<Departamento> listaDepartamentos = new ArrayList<>();
     private List<Projeto> listaProjetos = new ArrayList<>();
 
@@ -51,12 +51,12 @@ public class Empresa {
     public List<Departamento> getListaDepartamentos() {
         return listaDepartamentos;
     }
-    
-    public void addListaDepartamentos(Departamento departamento){
+
+    public void addListaDepartamentos(Departamento departamento) {
         listaDepartamentos.add(departamento);
     }
-    
-    public void removeListaDepartamentos(Departamento departamento){
+
+    public void removeListaDepartamentos(Departamento departamento) {
         listaDepartamentos.remove(departamento);
     }
 
@@ -64,11 +64,11 @@ public class Empresa {
         return listaProjetos;
     }
 
-    public void addListaProjetos(Projeto projeto){
+    public void addListaProjetos(Projeto projeto) {
         listaProjetos.add(projeto);
     }
-    
-    public void removeListaProjetos(Projeto projeto){
+
+    public void removeListaProjetos(Projeto projeto) {
         listaProjetos.add(projeto);
     }
 }

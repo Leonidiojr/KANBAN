@@ -14,20 +14,21 @@ import model.entities.enums.StatusSituacao;
  * @brief Class Projeto
  */
 public class Projeto {
+
     private String nome;
     private Date dataInicio;
     private Date dataFim;
     private String descricao;
     private StatusSituacao situacao;
-    
+
     private Empresa empresa;
     private List<Atividade> atividades = new ArrayList<>();
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            
-    public Projeto(){
+
+    public Projeto() {
     }
-    
+
     public Projeto(String nome, Date dataInicio, Date dataFim, String descricao, StatusSituacao situacao, Empresa empresa) {
         this.nome = nome;
         this.dataInicio = dataInicio;
@@ -88,21 +89,21 @@ public class Projeto {
     public List<Atividade> getAtividades() {
         return atividades;
     }
-    
-    public void addAtividade(Atividade atividade){
+
+    public void addAtividade(Atividade atividade) {
         atividades.add(atividade);
     }
-    
-    public void removeAtividade(Atividade atividade){
+
+    public void removeAtividade(Atividade atividade) {
         atividades.remove(atividade);
     }
-    
-    public long calcularDuracao(){
-        long duracao = dataFim.getTime()- dataInicio.getTime();
+
+    public long calcularDuracao() {
+        long duracao = dataFim.getTime() - dataInicio.getTime();
         return TimeUnit.DAYS.convert(duracao, TimeUnit.DAYS);
     }
-    
-    public double calcPercent(){
+
+    public double calcPercent() {
         //essa função precisa da porcentagem da ação para funcionar,
         //ela precisa calcular a porcentagem da atividade baseada na porcentagem de cada atividade
         return 0;

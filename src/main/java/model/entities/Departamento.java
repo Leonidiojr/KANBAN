@@ -17,6 +17,7 @@ public class Departamento {
 
     private Empresa empresa;
     private List<Funcionario> listaFuncionarios = new ArrayList<>();
+
     // Construtor vazio da classe Departamento
     public Departamento() {
     }
@@ -63,7 +64,7 @@ public class Departamento {
     public void addListaFuncionarios(Funcionario funcionario) {
         listaFuncionarios.add(funcionario);
     }
-    
+
     public void removeListaFuncionarios(Funcionario funcionario) {
         listaFuncionarios.remove(funcionario);
     }
