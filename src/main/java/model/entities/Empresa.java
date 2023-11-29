@@ -1,5 +1,8 @@
 package model.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Alexandre dos Santos Cunha <alexandre.sc115@gmail.com>
@@ -10,7 +13,10 @@ public class Empresa {
 
     // Atributos da classe Empresa
     private String nomeEmpresa;
-    private Double cnpj; 
+    private Double cnpj;
+
+    private List<Departamento> listaDepartamentos = new ArrayList<>();
+    private List<Projeto> listaProjetos = new ArrayList<>();
 
     // Construtor vazio da classe Empresa
     public Empresa() {
@@ -42,4 +48,27 @@ public class Empresa {
         this.cnpj = cnpj;
     }
 
+    public List<Departamento> getListaDepartamentos() {
+        return listaDepartamentos;
+    }
+
+    public void addListaDepartamentos(Departamento departamento) {
+        listaDepartamentos.add(departamento);
+    }
+
+    public void removeListaDepartamentos(Departamento departamento) {
+        listaDepartamentos.remove(departamento);
+    }
+
+    public List<Projeto> getListaProjetos() {
+        return listaProjetos;
+    }
+
+    public void addListaProjetos(Projeto projeto) {
+        listaProjetos.add(projeto);
+    }
+
+    public void removeListaProjetos(Projeto projeto) {
+        listaProjetos.add(projeto);
+    }
 }

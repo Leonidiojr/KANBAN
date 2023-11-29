@@ -1,5 +1,13 @@
 package model.entities;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import model.entities.enums.TipoUsuario;
+
 /**
  *
  * @author Alexandre dos Santos Cunha <alexandre.sc115@gmail.com>
@@ -7,13 +15,17 @@ package model.entities;
  * @brief Class Senha
  */
 public class Senha {
-    
+
     private String login; // Armazena o nome de usuário ou login (privado para acesso interno à classe)
     protected String senha; // Armazena a senha (protegido para acesso a classes filhas)
+    private TipoUsuario tipoUsuario;
+    private Funcionario funcionario;
 
-    public Senha(String login, String senha) {
+    public Senha(String login, String senha, TipoUsuario tipoUsuario, Funcionario funcionario) {
         this.login = login;
         this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
+        this.funcionario = funcionario;
     }
 
     public String getLogin() {
@@ -32,5 +44,123 @@ public class Senha {
         this.senha = senha;
     }
 
-    
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public void criarPastas() {
+        String path = "";
+        try {
+            boolean file = new File("c:" + "\\cadastro").mkdir();
+            file = new File("c:\\cadastro\\funcionarios").mkdir();
+            file = new File("c:\\cadastro\\lideres").mkdir();
+            file = new File("c:\\cadastro\\adms").mkdir();
+        } finally {
+        }
+    }
+
+    public void cadastroUsuario(String login, String senha, TipoUsuario tipoUsuario) {
+        this.login = login;
+        this.senha = senha;
+        this.tipoUsuario = tipoUsuario;
+        String path = "";
+        for (int i = 0; i < 3; i++) {
+            if (i == 0) {
+                path = "c:\\cadastro\\adms\\" + login + ".txt";
+            }
+            if (i == 1) {
+                path = "c:\\cadastro\\lideres\\" + login + ".txt";
+            }
+            if (i == 2) {
+                path = "c:\\cadastro\\funcionarios\\" + login + ".txt";
+            }
+            try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+                System.out.println("O usuário já existe");//subtrituir por tela
+            } catch (IOException e) {
+                String[] lines = new String[]{login, senha};
+
+                if (tipoUsuario == TipoUsuario.FUNCIONARIO) {
+                    path = "c:\\cadastro\\funcionarios\\" + login + ".txt";
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+                        for (String line : lines) {
+                            bw.write(line);
+                            bw.newLine();
+                        }
+                    } catch (IOException f) {
+                        e.printStackTrace();
+                    }
+                }
+                if (tipoUsuario == TipoUsuario.LIDER) {
+                    path = "c:\\cadastro\\lideres\\" + login + ".txt";
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+                        for (String line : lines) {
+                            bw.write(line);
+                            bw.newLine();
+                        }
+                    } catch (IOException g) {
+                        e.printStackTrace();
+                    }
+                }
+                if (tipoUsuario == TipoUsuario.ADMINISTRADOR) {
+                    path = "c:\\cadastro\\adms\\" + login + ".txt";
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
+                        for (String line : lines) {
+                            bw.write(line);
+                            bw.newLine();
+                        }
+                    } catch (IOException h) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+    }
+
+    public void VerificacaoUsuario(String login, String senha) {
+        String loginVerificar = login;//entrada.get()
+        String senhaVerificar = senha;//entrada.get()
+        boolean senhaValida = false;
+        String path = "";
+        for (int i = 0; i < 3; i++) {
+            if (i == 0) {
+                path = "c:\\cadastro\\adms\\" + loginVerificar + ".txt";
+            }
+            if (i == 1) {
+                path = "c:\\cadastro\\lideres\\" + loginVerificar + ".txt";
+            }
+            if (i == 2) {
+                path = "c:\\cadastro\\funcionarios\\" + loginVerificar + ".txt";
+            }
+            try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+                String line = br.readLine();
+                while (line != null) {
+                    line = br.readLine();
+                    if (line != null) {
+                        if (line.equals(senhaVerificar)) {
+                            senhaValida = true;
+                        }
+                    }
+                }
+                if (senhaValida == true) {
+                    System.out.println("Logado com sucesso");// proxima tela
+                } else {
+                    System.out.println("Usuário ou senha invalido");
+                }
+            } catch (IOException e) {
+                System.out.println("Usuário ou senha invalido"); // alterar depois
+            }
+        }
+    }
 }

@@ -10,18 +10,25 @@ public class Funcionario {
 
     // Atributos da classe Funcionario
     private String nomeFuncionario;
-    private Double cpf; 
-    private Integer matricula; 
+    private String cpf;
+    private Integer matricula;
+
+    private Acao acao;
+    private Senha senha;
+    private Departamento departamento;
 
     // Construtor vazio da classe Funcionario
     public Funcionario() {
     }
 
     // Construtor que inicializa nomeFuncionario, cpf e matricula do funcionário
-    public Funcionario(String nomeFuncionario, Double cpf, Integer matricula) {
+    public Funcionario(String nomeFuncionario, String cpf, Integer matricula, Senha senha, Departamento departamento, Acao acao) {
         this.nomeFuncionario = nomeFuncionario;
         this.cpf = cpf;
         this.matricula = matricula;
+        this.acao = acao;
+        this.senha = senha;
+        this.departamento = departamento;
     }
 
     // Getter para obter o nome do funcionário
@@ -35,12 +42,12 @@ public class Funcionario {
     }
 
     // Getter para obter o CPF do funcionário
-    public Double getCpf() {
+    public String getCpf() {
         return cpf;
     }
 
     // Setter para definir o CPF do funcionário
-    public void setCpf(Double cpf) {
+    public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
@@ -54,4 +61,33 @@ public class Funcionario {
         this.matricula = matricula;
     }
 
+    public Senha getSenha() {
+        return senha;
+    }
+
+    public void setSenha(Senha senha) {
+        this.senha = senha;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
+    }
+
+    public Acao getAcao() {
+        return acao;
+    }
+
+    public void setAcao(Acao acao) {
+        this.acao = acao;
+    }
+    
+    public boolean verificarCPF(String cpf){
+        
+        return false;
+    }
+    
 }
