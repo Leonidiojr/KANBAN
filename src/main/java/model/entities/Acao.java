@@ -25,12 +25,14 @@ public class Acao {
     private Integer prorrogacao;
     private TipoProrrogacao tipoProrrogacao;
     private StatusSituacao situacao;
- 
+    
+    private Funcionario funcionario;
+    private Atividade atividade;
 
     public Acao() {
     }
 
-    public Acao(String nome, Date dataInicio, Date dataFim, Double percentual, Status status, TipoProrrogacao tipoProrrogacao, Integer prorrogacao, StatusSituacao situacao) {
+    public Acao(String nome, Date dataInicio, Date dataFim, Double percentual, Status status, TipoProrrogacao tipoProrrogacao, Integer prorrogacao, StatusSituacao situacao, Funcionario funcionario, Atividade atividade) {
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
@@ -39,6 +41,8 @@ public class Acao {
         this.tipoProrrogacao = tipoProrrogacao;
         this.prorrogacao = prorrogacao;
         this.situacao = situacao;
+        this.funcionario = funcionario;
+        this.atividade = atividade;
     }
 
     public String getNome() {
@@ -104,7 +108,23 @@ public class Acao {
     public void setSituacao(StatusSituacao situacao) {
         this.situacao = situacao;
     }
-  
+
+    public Funcionario getFuncionario() {
+        return funcionario;
+    }
+
+    public void setFuncionario(Funcionario funcionario) {
+        this.funcionario = funcionario;
+    }
+
+    public Atividade getAtividade() {
+        return atividade;
+    }
+
+    public void setAtividade(Atividade atividade) {
+        this.atividade = atividade;
+    }
+    
     public Double atualizarPercentual(){
         percentual = 0.0;//entrada.get();
         return percentual;

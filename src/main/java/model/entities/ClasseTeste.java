@@ -26,7 +26,7 @@ public class ClasseTeste {
         String senha = "admin";
         TipoUsuario tipoUsuario = TipoUsuario.ADMINISTRADOR;
             
-        Senha usuario = new Senha(login, senha, tipoUsuario);
+        Senha usuario = new Senha(login, senha, tipoUsuario, funcionario);
         Scanner sc = new Scanner(System.in);
         /*SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         
@@ -107,29 +107,33 @@ public class ClasseTeste {
         System.out.println("Deseja criar uma pasta nova? [1 - Sim|2 - Não]");
         int opcarq = sc.nextInt();
         if(opcarq == 1){
-            usuario.criarArquivos();
+            usuario.criarPastas();
             usuario.cadastroUsuario(login, senha, tipoUsuario);
         }
-        System.out.println("Cadastro de novo Usuário");
-        System.out.println("Informe o Login:");
-        login = sc.next();
-        System.out.println("Cadastre a senha: ");
-        senha = sc.next();
-        System.out.println("Informe o tipo de Usuário:");
-        System.out.println("1 - Funcionário");
-        System.out.println("2 - Líder");
-        System.out.println("3 - Administrador");
-        int tpfunc = sc.nextInt();
-        if(tpfunc == 1){
-            tipoUsuario = TipoUsuario.FUNCIONARIO;
+        System.out.println("Deseja cadastrar novo usuario? [1 - Sim|2 - Não]");
+        int opcusr = sc.nextInt();
+        if (opcusr == 1) {
+            System.out.println("Cadastro de novo Usuário");
+            System.out.println("Informe o Login:");
+            login = sc.next();
+            System.out.println("Cadastre a senha: ");
+            senha = sc.next();
+            System.out.println("Informe o tipo de Usuário:");
+            System.out.println("1 - Funcionário");
+            System.out.println("2 - Líder");
+            System.out.println("3 - Administrador");
+            int tpfunc = sc.nextInt();
+            if(tpfunc == 1){
+                tipoUsuario = TipoUsuario.FUNCIONARIO;
+            }
+            if(tpfunc == 2){
+                tipoUsuario = TipoUsuario.LIDER;
+            }
+            if(tpfunc == 3){
+                tipoUsuario = TipoUsuario.ADMINISTRADOR;
+            }
+            usuario.cadastroUsuario(login, senha, tipoUsuario);
         }
-        if(tpfunc == 2){
-            tipoUsuario = TipoUsuario.LIDER;
-        }
-        if(tpfunc == 3){
-            tipoUsuario = TipoUsuario.ADMINISTRADOR;
-        }
-        usuario.cadastroUsuario(login, senha, tipoUsuario);
         
         System.out.println("Informe o login: ");
         login = sc.next();

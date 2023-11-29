@@ -4,7 +4,9 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 /**
  *
  * @author Volid
@@ -17,6 +19,9 @@ public class Atividade {
     private Date dataInicio;
     private Date dataFim;
     private Double percentualAtividade;
+    
+    private Projeto projeto;
+    private List<Acao> listaAcoes = new ArrayList<>();
     
     
     public Atividade(){
@@ -56,9 +61,33 @@ public class Atividade {
     public Double getPercentualAtividade() {
         return percentualAtividade;
     }
+
+    public void setPercentualAtividade(Double percentualAtividade) {
+        this.percentualAtividade = percentualAtividade;
+    }
+
+    public Projeto getProjeto() {
+        return projeto;
+    }
+
+    public void setProjeto(Projeto projeto) {
+        this.projeto = projeto;
+    }
+
+    public List<Acao> getAcoes() {
+        return listaAcoes;
+    }
+
+    public void addListaAcoes(Acao acao) {
+        listaAcoes.add(acao);
+    }
+    
+    public void removeListaAcoes(Acao acao) {
+        listaAcoes.remove(acao);
+    }
     
     public void calcPercent(){
-        
+        //Arrumar essa função
     }
     
     public void validarData(){

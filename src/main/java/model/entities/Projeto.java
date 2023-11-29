@@ -28,12 +28,13 @@ public class Projeto {
     public Projeto(){
     }
     
-    public Projeto(String nome, Date dataInicio, Date dataFim, String descricao, StatusSituacao situacao) {
+    public Projeto(String nome, Date dataInicio, Date dataFim, String descricao, StatusSituacao situacao, Empresa empresa) {
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.descricao = descricao;
         this.situacao = situacao;
+        this.empresa = empresa;
     }
 
     public String getNome() {
