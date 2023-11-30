@@ -13,7 +13,7 @@ public class Empresa {
 
     // Atributos da classe Empresa
     private String nomeEmpresa;
-    private Double cnpj;
+    private String cnpj;
 
     private List<Departamento> listaDepartamentos = new ArrayList<>();
     private List<Projeto> listaProjetos = new ArrayList<>();
@@ -23,7 +23,7 @@ public class Empresa {
     }
 
     // Construtor que inicializa nomeEmpresa e cnpj da empresa
-    public Empresa(String nomeEmpresa, Double cnpj) {
+    public Empresa(String nomeEmpresa, String cnpj) {
         this.nomeEmpresa = nomeEmpresa;
         this.cnpj = cnpj;
     }
@@ -39,12 +39,12 @@ public class Empresa {
     }
 
     // Getter para obter o CNPJ da empresa
-    public Double getCnpj() {
+    public String getCnpj() {
         return cnpj;
     }
 
     // Setter para definir o CNPJ da empresa
-    public void setCnpj(Double cnpj) {
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
 

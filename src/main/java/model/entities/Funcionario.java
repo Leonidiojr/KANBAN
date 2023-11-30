@@ -1,5 +1,8 @@
 package model.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author Alexandre dos Santos Cunha <alexandre.sc115@gmail.com>
@@ -13,7 +16,7 @@ public class Funcionario {
     private String cpf;
     private Integer matricula;
 
-    private Acao acao;
+    private List<Acao> listaAcoes = new ArrayList<>();
     private Senha senha;
     private Departamento departamento;
 
@@ -22,12 +25,10 @@ public class Funcionario {
     }
 
     // Construtor que inicializa nomeFuncionario, cpf e matricula do funcionário
-    public Funcionario(String nomeFuncionario, String cpf, Integer matricula, Senha senha, Departamento departamento, Acao acao) {
+    public Funcionario(String nomeFuncionario, String cpf, Integer matricula, Departamento departamento) {
         this.nomeFuncionario = nomeFuncionario;
         this.cpf = cpf;
         this.matricula = matricula;
-        this.acao = acao;
-        this.senha = senha;
         this.departamento = departamento;
     }
 
@@ -77,17 +78,51 @@ public class Funcionario {
         this.departamento = departamento;
     }
 
-    public Acao getAcao() {
-        return acao;
+    public List<Acao> getListaAcoes() {
+        return listaAcoes;
     }
 
-    public void setAcao(Acao acao) {
-        this.acao = acao;
+    public void addListaAcoes(Acao acao) {
+        listaAcoes.add(acao);
     }
     
+     public void removeListaAcoes(Acao acao) {
+        listaAcoes.remove(acao);
+    }
+     
     public boolean verificarCPF(String cpf){
+        this.cpf = cpf;
         
-        return false;
+        cpf = cpf.replaceAll("[^0-9]", "");
+
+        // Verificar se o CPF tem 11 dígitos
+        if (cpf.length() != 11) {
+            return false;
+        }
+
+        // Calcular o primeiro dígito verificador
+        int soma = 0;
+        for (int i = 0; i < 9; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (10 - i);
+        }
+        int resto = soma % 11;
+        int digito1 = (resto < 2) ? 0 : (11 - resto);
+
+        // Verificar o primeiro dígito verificador
+        if (digito1 != Character.getNumericValue(cpf.charAt(9))) {
+            return false;
+        }
+
+        // Calcular o segundo dígito verificador
+        soma = 0;
+        for (int i = 0; i < 10; i++) {
+            soma += Character.getNumericValue(cpf.charAt(i)) * (11 - i);
+        }
+        resto = soma % 11;
+        int digito2 = (resto < 2) ? 0 : (11 - resto);
+
+        // Verificar o segundo dígito verificador
+        return (digito2 == Character.getNumericValue(cpf.charAt(10)));
     }
     
 }
