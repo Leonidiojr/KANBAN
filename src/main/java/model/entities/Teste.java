@@ -8,7 +8,9 @@ import java.util.Scanner;
 
 /**
  *
- * @author aluno
+ * @author Pedro Queiroz Lima Barreto <pqlb1512@gmail.com>
+ * @date 16/11/2023
+ * @brief Class Projeto
  */
 public class Teste {
     public static void main(String[] args) {
@@ -19,6 +21,12 @@ public class Teste {
         System.out.println("Informe o CNPJ: ");
         String cnpj = sc.next();
         Empresa empresa = new Empresa(nomeEmpresa, cnpj);
+        if(empresa.validarCNPJ(cnpj)){
+            System.out.println("CNPJ válido"); 
+        }
+        else{
+            System.out.println("CNPJ inválido");
+        }
         System.out.println("Cadastro de Departamento!!!");
         System.out.println("Informe o nome do departamento: ");
         String nomeDepartamento = sc.next();
@@ -33,12 +41,12 @@ public class Teste {
         System.out.println("Informe o número da matrícula");
         Integer matricula = sc.nextInt();
         Funcionario funcionario = new Funcionario(nomeFuncionario,cpf,matricula,departamento);
-        if(funcionario.verificarCPF(cpf) == true){
+        if(funcionario.validarCPF(cpf)){
             departamento.addListaFuncionarios(funcionario);
-            System.out.println("Deu certo");
+            System.out.println("CPF Válido");
         }
         else{
-            System.out.println("Deu errado");
+            System.out.println("CPF inválido"); 
             funcionario = null;
         }
     }

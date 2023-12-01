@@ -90,13 +90,25 @@ public class Funcionario {
         listaAcoes.remove(acao);
     }
      
-    public boolean verificarCPF(String cpf){
+    public boolean validarCPF(String cpf){
         this.cpf = cpf;
         
         cpf = cpf.replaceAll("[^0-9]", "");
 
         // Verificar se o CPF tem 11 dígitos
         if (cpf.length() != 11) {
+            return false;
+        }
+        
+        if("11111111111".equals(cpf)||
+           "22222222222".equals(cpf)||
+           "33333333333".equals(cpf)||
+           "44444444444".equals(cpf)||
+           "55555555555".equals(cpf)||
+           "66666666666".equals(cpf)||
+           "77777777777".equals(cpf)||
+           "88888888888".equals(cpf)||
+           "99999999999".equals(cpf)){
             return false;
         }
 
