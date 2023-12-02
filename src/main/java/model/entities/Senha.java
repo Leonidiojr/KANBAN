@@ -62,12 +62,14 @@ public class Senha {
 
     public void criarPastas() {
         String path = "";
-        try {
+        try
+        {
             boolean file = new File("c:" + "\\cadastro").mkdir();
             file = new File("c:\\cadastro\\funcionarios").mkdir();
             file = new File("c:\\cadastro\\lideres").mkdir();
             file = new File("c:\\cadastro\\adms").mkdir();
-        } finally {
+        } finally
+        {
         }
     }
 
@@ -76,51 +78,72 @@ public class Senha {
         this.senha = senha;
         this.tipoUsuario = tipoUsuario;
         String path = "";
-        for (int i = 0; i < 3; i++) {
-            if (i == 0) {
+        for (int i = 0; i < 3; i++)
+        {
+            if (i == 0)
+            {
                 path = "c:\\cadastro\\adms\\" + login + ".txt";
             }
-            if (i == 1) {
+            if (i == 1)
+            {
                 path = "c:\\cadastro\\lideres\\" + login + ".txt";
             }
-            if (i == 2) {
+            if (i == 2)
+            {
                 path = "c:\\cadastro\\funcionarios\\" + login + ".txt";
             }
-            try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            try (BufferedReader br = new BufferedReader(new FileReader(path)))
+            {
                 System.out.println("O usuário já existe");//subtrituir por tela
-            } catch (IOException e) {
-                String[] lines = new String[]{login, senha};
+            } catch (IOException e)
+            {
+                String[] lines = new String[]
+                {
+                    login, senha
+                };
 
-                if (tipoUsuario == TipoUsuario.FUNCIONARIO) {
+                if (tipoUsuario == TipoUsuario.FUNCIONARIO)
+                {
                     path = "c:\\cadastro\\funcionarios\\" + login + ".txt";
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-                        for (String line : lines) {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(path)))
+                    {
+                        for (String line : lines)
+                        {
                             bw.write(line);
                             bw.newLine();
                         }
-                    } catch (IOException f) {
+                    } catch (IOException f)
+                    {
                         e.printStackTrace();
                     }
                 }
-                if (tipoUsuario == TipoUsuario.LIDER) {
+                if (tipoUsuario == TipoUsuario.LIDER)
+                {
                     path = "c:\\cadastro\\lideres\\" + login + ".txt";
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-                        for (String line : lines) {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(path)))
+                    {
+                        for (String line : lines)
+                        {
                             bw.write(line);
                             bw.newLine();
                         }
-                    } catch (IOException g) {
+                    } catch (IOException g)
+                    {
                         e.printStackTrace();
                     }
                 }
-                if (tipoUsuario == TipoUsuario.ADMINISTRADOR) {
+                if (tipoUsuario == TipoUsuario.ADMINISTRADOR)
+                {
                     path = "c:\\cadastro\\adms\\" + login + ".txt";
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-                        for (String line : lines) {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(path)))
+                    {
+                        for (String line : lines)
+                        {
                             bw.write(line);
                             bw.newLine();
                         }
-                    } catch (IOException h) {
+                    } catch (IOException h)
+                    {
                         e.printStackTrace();
                     }
                 }
@@ -128,37 +151,48 @@ public class Senha {
         }
     }
 
-    public void VerificacaoUsuario(String login, String senha) {
+    public void verificacaoUsuario(String login, String senha) {
         String loginVerificar = login;//entrada.get()
         String senhaVerificar = senha;//entrada.get()
         boolean senhaValida = false;
         String path = "";
-        for (int i = 0; i < 3; i++) {
-            if (i == 0) {
+        for (int i = 0; i < 3; i++)
+        {
+            if (i == 0)
+            {
                 path = "c:\\cadastro\\adms\\" + loginVerificar + ".txt";
             }
-            if (i == 1) {
+            if (i == 1)
+            {
                 path = "c:\\cadastro\\lideres\\" + loginVerificar + ".txt";
             }
-            if (i == 2) {
+            if (i == 2)
+            {
                 path = "c:\\cadastro\\funcionarios\\" + loginVerificar + ".txt";
             }
-            try (BufferedReader br = new BufferedReader(new FileReader(path))) {
+            try (BufferedReader br = new BufferedReader(new FileReader(path)))
+            {
                 String line = br.readLine();
-                while (line != null) {
+                while (line != null)
+                {
                     line = br.readLine();
-                    if (line != null) {
-                        if (line.equals(senhaVerificar)) {
+                    if (line != null)
+                    {
+                        if (line.equals(senhaVerificar))
+                        {
                             senhaValida = true;
                         }
                     }
                 }
-                if (senhaValida == true) {
+                if (senhaValida == true)
+                {
                     System.out.println("Logado com sucesso");// proxima tela
-                } else {
+                } else
+                {
                     System.out.println("Usuário ou senha invalido");
                 }
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 System.out.println("Usuário ou senha invalido"); // alterar depois
             }
         }

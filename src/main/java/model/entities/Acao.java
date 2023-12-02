@@ -18,7 +18,7 @@ public class Acao {
     private String nome;
     private Date dataInicio;
     private Date dataFim;
-    private Double percentual;
+    private Double percentualAcao;
     private Status status;
     private Integer prorrogacao;
     private TipoProrrogacao tipoProrrogacao;
@@ -30,14 +30,12 @@ public class Acao {
     public Acao() {
     }
 
-    public Acao(String nome, Date dataInicio, Date dataFim, Double percentual, Status status, TipoProrrogacao tipoProrrogacao, Integer prorrogacao, StatusSituacao situacao, Funcionario funcionario, Atividade atividade) {
+    public Acao(String nome, Date dataInicio, Date dataFim, Double percentualAcao, Status status, StatusSituacao situacao, Funcionario funcionario, Atividade atividade) {
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
-        this.percentual = percentual;
+        this.percentualAcao = percentualAcao;
         this.status = status;
-        this.tipoProrrogacao = tipoProrrogacao;
-        this.prorrogacao = prorrogacao;
         this.situacao = situacao;
         this.funcionario = funcionario;
         this.atividade = atividade;
@@ -67,12 +65,12 @@ public class Acao {
         this.dataFim = dataFim;
     }
 
-    public Double getPercentual() {
-        return percentual;
+    public Double getPercentualAcao() {
+        return percentualAcao;
     }
 
-    public void setPercentual(Double percentual) {
-        this.percentual = percentual;
+    public void setPercentualAcao(Double percentualAcao) {
+        this.percentualAcao = percentualAcao;
     }
 
     public Status getStatus() {
@@ -123,21 +121,24 @@ public class Acao {
         this.atividade = atividade;
     }
 
-    public Double atualizarPercentual() {
-        percentual = 0.0;//entrada.get();
-        return percentual;
+    public Double atualizarPercentualAcao() {
+        percentualAcao = 0.0;//entrada.get();
+        return percentualAcao;
     }
 
     public String validarData(Date dataInicio, Date dataFim) {
-        if (!dataFim.after(dataInicio)) {
+        if (!dataFim.after(dataInicio))
+        {
             return "Data de fim não pode ser antes da de início";
-        } else {
+        } else
+        {
             return null;
         }
     }
 
     public void prorrogacao(int prorrogacao, TipoProrrogacao tipoProrrogacao) {
-        switch (tipoProrrogacao) {
+        switch (tipoProrrogacao)
+        {
             case SECONDS:
                 LocalDateTime dataFimDateTime = dataFim.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
                 LocalDateTime novaDataSegundos = dataFimDateTime.plusSeconds(prorrogacao);

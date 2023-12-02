@@ -7,7 +7,7 @@ package model.entities.enums;
  * @brief Class StatusSituacao
  */
 public enum StatusSituacao {
-    
+
     ATRASADO,
     NO_PRAZO;
 

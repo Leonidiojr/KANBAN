@@ -20,22 +20,24 @@ public class Projeto {
     private Date dataFim;
     private String descricao;
     private StatusSituacao situacao;
+    private Double percentualProjeto;
 
     private Empresa empresa;
-    private List<Atividade> atividades = new ArrayList<>();
+    private List<Atividade> listaAtividades = new ArrayList<>();
 
     private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
     public Projeto() {
     }
 
-    public Projeto(String nome, Date dataInicio, Date dataFim, String descricao, StatusSituacao situacao, Empresa empresa) {
+    public Projeto(String nome, Date dataInicio, Date dataFim, String descricao, StatusSituacao situacao, Empresa empresa, Double percentualProjeto) {
         this.nome = nome;
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.descricao = descricao;
         this.situacao = situacao;
         this.empresa = empresa;
+        this.percentualProjeto = percentualProjeto;
     }
 
     public String getNome() {
@@ -87,15 +89,15 @@ public class Projeto {
     }
 
     public List<Atividade> getAtividades() {
-        return atividades;
+        return listaAtividades;
     }
 
     public void addAtividade(Atividade atividade) {
-        atividades.add(atividade);
+        listaAtividades.add(atividade);
     }
 
     public void removeAtividade(Atividade atividade) {
-        atividades.remove(atividade);
+        listaAtividades.remove(atividade);
     }
 
     public long calcularDuracao() {
@@ -103,9 +105,15 @@ public class Projeto {
         return TimeUnit.DAYS.convert(duracao, TimeUnit.DAYS);
     }
 
+    //Está função calcula a média da porcentagem do projeto
     public double calcPercent() {
-        //essa função precisa da porcentagem da ação para funcionar,
-        //ela precisa calcular a porcentagem da atividade baseada na porcentagem de cada atividade
-        return 0;
+        double porcentagemTotal = 0;
+        int cont = 0;
+        for (Atividade atividade : listaAtividades)
+        {
+            porcentagemTotal += atividade.getPercentualAtividade();
+            cont++;
+        }
+        return porcentagemTotal / cont;
     }
 }

@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import model.entities.enums.StatusSituacao;
 
 /**
  *
@@ -20,6 +21,7 @@ public class Atividade {
     private Date dataInicio;
     private Date dataFim;
     private Double percentualAtividade;
+    private StatusSituacao situacao;
 
     private Projeto projeto;
     private List<Acao> listaAcoes = new ArrayList<>();
@@ -86,39 +88,43 @@ public class Atividade {
         listaAcoes.remove(acao);
     }
 
-    public void calcPercent() {
-        //Arrumar essa função
+    public void definirData() {
+        for (Acao acao : listaAcoes)
+        {
+            if (dataInicio.after(acao.getDataInicio()))
+            {
+                dataInicio = acao.getDataInicio();
+            }
+            if (dataFim.before(acao.getDataFim()))
+            {
+                dataFim = acao.getDataFim();
+            }
+
+        }
     }
 
-    public void validarData() {
-
-        if (dataInicio != null) {
-            validarDataFormato(dataInicio, "Data de Início");
-        }
-
-        if (dataFim != null) {
-            validarDataFormato(dataFim, "Data de Fim");
-        }
-    }
-
-    private void validarDataFormato(Date data, String tipoData) {
+    private void validarDataFormato(Date data, String tipoData) //Pode ser Util para exibir a data
+    {
         // Define o formato esperado da data
-        DateFormat formatoData = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
         formatoData.setLenient(false); // Impede datas inválidas, como 2023-02-30
 
-        try {
+        try
+        {
             // Tenta fazer o parsing da data
             String dataString = formatoData.format(data); // Converte Date para String
             formatoData.parse(dataString); // Tenta fazer o parsing da String
             System.out.println(tipoData + " válida: " + dataString);
-        } catch (ParseException e) {
+        } catch (ParseException e)
+        {
             // Captura exceção se a data não estiver no formato correto
-            System.out.println(tipoData + " inválida. Formato esperado: yyyy-MM-dd");
+            System.out.println(tipoData + " inválida. Formato esperado: dd/MM/yyyy");
         }
     }
 
     public void prorrogarData(int dias) {
-        if (dataFim != null) {
+        if (dataFim != null)
+        {
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(dataFim);
 
@@ -129,9 +135,22 @@ public class Atividade {
             dataFim = calendar.getTime();
 
             System.out.println("Data de Fim prorrogada para: " + dataFim);
-        } else {
+        } else
+        {
             System.out.println("Não é possível prorrogar. Data de Fim não definida.");
         }
+    }
+
+    //Está função calcula a média de porcentagem das ações 
+    public double calcPercent() {
+        double porcentagemTotal = 0;
+        int cont = 0;
+        for (Acao acao : listaAcoes)
+        {
+            porcentagemTotal += acao.getPercentualAcao();
+            cont++;
+        }
+        return porcentagemTotal / cont;
     }
 
 }
